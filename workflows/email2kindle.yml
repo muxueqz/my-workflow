@@ -23,6 +23,12 @@ jobs:
         run: |
           echo subject: $subject
 
+      - name: Print Base64 Outputs
+        env:
+          subject: ${{(on.email.outputs.subject)}}
+        run: |
+          echo subject: $subject | base64
+
       - name: Send mail
         uses: muxueqz/action-send-mail@v3.0.3
         with:
