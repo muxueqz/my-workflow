@@ -6,9 +6,9 @@ on:
       tls: true
       user: ${{secrets.EMAIL_USER}}
       password: ${{secrets.EMAIL_PASSWORD}}
-    config:
-      filterOutputs:
-        subject: send2kindle_by_workflow
+    # config:
+      # filterOutputs:
+        # subject: send2kindle_by_workflow
 jobs:
   print:
     name: Print
