@@ -1,9 +1,9 @@
 on:
   email:
     imap:
-      host: imap.163.com
-      port: 143
-      tls: false
+      host: outlook.office365.com
+      port: 993
+      tls: true
       user: ${{secrets.EMAIL_USER}}
       password: ${{secrets.EMAIL_PASSWORD}}
     config:
