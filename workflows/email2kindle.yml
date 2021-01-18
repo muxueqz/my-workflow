@@ -42,4 +42,5 @@ jobs:
           #          attachments: attachments.zip,git.diff,./dist/static/main.js
           # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
           # attachments: ${{(on.email.outputs.textAsHtml)}}
-          attachments: '[${{(on.email.outputs.text)}}]'
+          # attachments: '[${{(on.email.outputs.text)}}]'
+          attachments: [${{(on.email.outputs.text)}}]
