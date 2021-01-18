@@ -4,9 +4,9 @@ on:
       host: imap.163.com
       user: ${{secrets.EMAIL_USER}}
       password: ${{secrets.EMAIL_PASSWORD}}
-    config:
-      filterOutputs:
-        subject: send2kindle_by_workflow
+    # config:
+      # filterOutputs:
+        # subject: send2kindle_by_workflow
 jobs:
   print:
     name: Print
