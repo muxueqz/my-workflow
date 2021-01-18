@@ -24,13 +24,13 @@ jobs:
           echo subject: $subject
 
       - name: Send mail
-        uses: muxueqz/action-send-mail@v3.0.1
+        uses: muxueqz/action-send-mail@v3.0.2
         with:
           server_address: outlook.office365.com
           server_port: 587
           username: ${{secrets.EMAIL_USER}}
           password: ${{secrets.EMAIL_PASSWORD}}
-          subject: Github Actions job result
+          subject: ${{(on.email.outputs.subject)}}
           body: Build job of ${{github.repository}} completed successfully!
           to: ${{secrets.TO_EMAIL}}
           from: actionsworkflow # <user@example.com>
