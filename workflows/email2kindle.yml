@@ -21,7 +21,7 @@ jobs:
           echo subject: $subject
 
       - name: Send mail
-        uses: muxueqz/action-send-mail@v3
+        uses: muxueqz/action-send-mail@v3.0.0
         with:
           server_address: outlook.office365.com
           server_port: 587
