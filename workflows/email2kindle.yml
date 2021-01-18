@@ -21,7 +21,7 @@ jobs:
           echo subject: $subject
 
       - name: Send mail
-        uses: muxueqz/action-send-mail@v3.0.0
+        uses: muxueqz/action-send-mail@v3.0.1
         with:
           server_address: outlook.office365.com
           server_port: 587
@@ -38,4 +38,4 @@ jobs:
           #          # Optional attachments:
           #          attachments: attachments.zip,git.diff,./dist/static/main.js
           # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
-          attachments: '[{"content": "${{(on.email.outputs.textAsHtml)}}", "filename":"push.txt"}]'
+          attachments: ${{(on.email.outputs.textAsHtml)}}
