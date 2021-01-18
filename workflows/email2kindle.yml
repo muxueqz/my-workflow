@@ -1,7 +1,7 @@
 on:
   email:
     imap:
-      host: imap.163.com
+      host: outlook.office365.com
       port: 993
       tls: true
       user: ${{secrets.EMAIL_USER}}
