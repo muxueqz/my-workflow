@@ -26,8 +26,9 @@ jobs:
       - name: Print Base64 Outputs
         env:
           subject: ${{(on.email.outputs.subject)}}
+          output: ${{(on.email.outputs.text)}}
         run: |
-          echo subject: $subject | base64
+          echo "output=$(echo $output| base64)" >> $GITHUB_ENV
 
       - name: Send mail
         uses: muxueqz/action-send-mail@v3.0.3
@@ -47,7 +48,8 @@ jobs:
           #          # Optional attachments:
           #          attachments: attachments.zip,git.diff,./dist/static/main.js
           # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
-          content_type: text/html
-          attachments: ${{(on.email.outputs.textAsHtml)}}
+          # content_type: text/html
+          # attachments: ${{(on.email.outputs.textAsHtml)}}
           # attachments: '[${{(on.email.outputs.text)}}]'
           # attachments: ${{(on.email.outputs.text)}}
+          attachments: ${{(output)}}
