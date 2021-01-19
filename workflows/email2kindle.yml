@@ -88,4 +88,4 @@ jobs:
           body: From Docker
           attachments: ${{(on.email.outputs.html)}}
           # attachments: TEST atTACHMENTS
-          attachments_filename: ${{(on.email.outputs.subject)}}.txt
+          attachments_filename: ${{(on.email.outputs.subject)}}.html
