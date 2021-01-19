@@ -56,9 +56,10 @@ jobs:
 
   send_email:
     name: Send Email
-    runs-on: muxueqz/sendemail-alpine
+    runs-on: ubuntu-latest
     steps:
       - name: Send Email by Docker
+        uses: docker://muxueqz/sendemail-alpine
         env:
           SUBJECT: ${{(on.email.outputs.subject)}}
           SMTP_SERVER: outlook.office365.com:587
