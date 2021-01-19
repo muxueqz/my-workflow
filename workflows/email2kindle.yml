@@ -78,28 +78,6 @@ jobs:
           smtp_user: ${{secrets.EMAIL_USER}}
           smtp_password: ${{secrets.EMAIL_PASSWORD}}
           body: From Docker
-          ATTACHMENTS: ${{(on.email.outputs.text)}}
+          attachments: ${{(on.email.outputs.text)}}
           # attachments: TEST atTACHMENTS
           attachments_filename: ${{(on.email.outputs.subject)}}.txt
-          # entrypoint: /usr/bin/sendemail.sh
-
-          #  send_email:
-          #    name: Send Email
-          #    runs-on: ubuntu-latest
-          #    steps:
-          #      - name: Send Email by Docker
-          #        uses: docker://muxueqz/sendemail-alpine
-          #        env:
-          #          SUBJECT: ${{(on.email.outputs.subject)}}
-          #          SMTP_SERVER: outlook.office365.com:587
-          #          TO_ADDRESS: ${{secrets.TO_EMAIL}}
-          #          FROM_ADDRESS: ${{secrets.EMAIL_USER}}
-          #          SMTP_USER: ${{secrets.EMAIL_USER}}
-          #          SMTP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          #          BODY: From Docker
-          #          ATTACHMENTS: ${{(on.email.outputs.text)}}
-          #          ATTACHMENTS_FILENAME: ${{(on.email.outputs.subject)}}.txt
-          #        # run: |
-          #          # /usr/bin/sendemail.sh
-          #        with:
-          #          entrypoint: /usr/bin/sendemail.sh
