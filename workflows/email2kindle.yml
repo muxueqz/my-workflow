@@ -64,6 +64,7 @@ jobs:
           SUBJECT: ${{(on.email.outputs.subject)}}
           SMTP_SERVER: outlook.office365.com:587
           TO_ADDRESS: ${{secrets.TO_EMAIL}}
+          FROM_ADDRESS: ${{secrets.EMAIL_USER}}
           SMTP_USER: ${{secrets.EMAIL_USER}}
           SMTP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
           BODY: From Docker
