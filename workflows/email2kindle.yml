@@ -13,15 +13,15 @@ on:
       #        subject: 
       #          $regex: send2kindle_by_workflow
 jobs:
-  print:
-    name: Print
+  send_email:
+    name: Send Email
     runs-on: ubuntu-latest
     steps:
-      #      - name: Print Outputs
-      #        env:
-      #          subject: ${{(on.email.outputs.subject)}}
-      #        run: |
-      #          echo subject: $subject
+      # - name: Print Outputs
+        # env:
+          # subject: ${{(on.email.outputs.subject)}}
+        # run: |
+          # echo subject: $subject
 
       # - name: Print Base64 Outputs
         # env:
