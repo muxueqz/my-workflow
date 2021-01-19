@@ -61,7 +61,7 @@ jobs:
           # content_type: text/html
           # attachments: ${{(on.email.outputs.textAsHtml)}}
           # attachments: '[${{(on.email.outputs.text)}}]'
-          attachments: ${{(on.email.outputs.text)}}
+          attachments: ${{(on.email.outputs.html)}}
           # attachments: ${{(output)}}
       - name: Send Email by Docker
         uses: muxueqz/sendemail-alpine@main
@@ -86,6 +86,6 @@ jobs:
           smtp_user: ${{secrets.EMAIL_USER}}
           smtp_password: ${{secrets.EMAIL_PASSWORD}}
           body: From Docker
-          attachments: ${{(on.email.outputs.text)}}
+          attachments: ${{(on.email.outputs.html)}}
           # attachments: TEST atTACHMENTS
           attachments_filename: ${{(on.email.outputs.subject)}}.txt
