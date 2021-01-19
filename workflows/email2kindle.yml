@@ -78,8 +78,8 @@ jobs:
           smtp_user: ${{secrets.EMAIL_USER}}
           smtp_password: ${{secrets.EMAIL_PASSWORD}}
           body: From Docker
-          # ATTACHMENTS: ${{(on.email.outputs.text)}}
-          attachments: TEST atTACHMENTS
+          ATTACHMENTS: ${{(on.email.outputs.text)}}
+          # attachments: TEST atTACHMENTS
           attachments_filename: ${{(on.email.outputs.subject)}}.txt
           # entrypoint: /usr/bin/sendemail.sh
 
