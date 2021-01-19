@@ -54,7 +54,7 @@ jobs:
       #     attachments: ${{(on.email.outputs.text)}}
       #     # attachments: ${{(output)}}
       - name: Send Email by Docker
-        uses: muxueqz/sendemail-alpine@v2
+        uses: muxueqz/sendemail-alpine@main
         #        # env:
         #          SUBJECT: ${{(on.email.outputs.subject)}}
         #          SMTP_SERVER: outlook.office365.com:587
