@@ -69,5 +69,7 @@ jobs:
           BODY: From Docker
           ATTACHMENTS: ${{(on.email.outputs.text)}}
           ATTACHMENTS_FILENAME: ${{(on.email.outputs.subject)}}.txt
-        run: |
-          /usr/bin/sendemail.sh
+        # run: |
+          # /usr/bin/sendemail.sh
+        with:
+          entrypoint: /usr/bin/sendemail.sh
