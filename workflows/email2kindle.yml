@@ -6,12 +6,14 @@ on:
       tls: true
       user: ${{secrets.EMAIL_USER}}
       password: ${{secrets.EMAIL_PASSWORD}}
-      #    config:
-      #      # filterOutputs:
-      #        # subject: send2kindle_by_workflow
-      #      filter:
-      #        subject: 
-      #          $regex: send2kindle_by_workflow
+    config:
+      filterOutputs:
+        # subject: send2kindle_by_workflow
+        subject: 1
+        text: 1
+      # filter:
+        # subject:
+          # $regex: send2kindle_by_workflow
 jobs:
   send_email:
     name: Send Email
