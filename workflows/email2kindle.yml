@@ -41,7 +41,7 @@ jobs:
           # echo "output=$(echo $output| base64)" >> $GITHUB_ENV
 
       - name: Send mail by action-send-mail
-        uses: muxueqz/action-send-mail@v3.0.3
+        uses: muxueqz/action-send-mail@master
         with:
           server_address: outlook.office365.com
           server_port: 587
@@ -62,6 +62,7 @@ jobs:
           # attachments: ${{(on.email.outputs.textAsHtml)}}
           # attachments: '[${{(on.email.outputs.text)}}]'
           attachments: ${{(on.email.outputs.html)}}
+          attachments_filename: ${{(on.email.outputs.subject)}}.html
           # attachments: ${{(output)}}
       - name: Send Email by Docker
         uses: muxueqz/sendemail-alpine@main
