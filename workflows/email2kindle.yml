@@ -53,3 +53,20 @@ jobs:
           # attachments: '[${{(on.email.outputs.text)}}]'
           attachments: ${{(on.email.outputs.text)}}
           # attachments: ${{(output)}}
+
+  send_email:
+    name: Send Email
+    runs-on: muxueqz/sendemail-alpine
+    steps:
+      - name: Send Email by Docker
+        env:
+          SUBJECT: ${{(on.email.outputs.subject)}}
+          SMTP_SERVER: outlook.office365.com:587
+          TO_ADDRESS: ${{secrets.TO_EMAIL}}
+          SMTP_USER: ${{secrets.EMAIL_USER}}
+          SMTP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
+          BODY: From Docker
+          ATTACHMENTS: ${{(on.email.outputs.text)}}
+          ATTACHMENTS_FILENAME: ${{(on.email.outputs.subject)}}.txt
+        run: |
+          /usr/bin/sendemail.sh
