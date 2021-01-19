@@ -69,7 +69,7 @@ jobs:
         #        # run: |
         #          # /usr/bin/sendemail.sh
         with:
-          subject: test subject
+          subject: 'test subject with quote'
           #          subject: ${{(on.email.outputs.subject)}}
           #          smtp_server: outlook.office365.com:587
           #          to_address: ${{secrets.TO_EMAIL}}
