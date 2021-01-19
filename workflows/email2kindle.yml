@@ -71,18 +71,17 @@ jobs:
         #        # run: |
         #          # /usr/bin/sendemail.sh
         with:
-          subject: 'test subject with quote'
-          #          subject: ${{(on.email.outputs.subject)}}
-          #          smtp_server: outlook.office365.com:587
-          #          to_address: ${{secrets.TO_EMAIL}}
-          #          from_address: ${{secrets.EMAIL_USER}}
-          #          smtp_user: ${{secrets.EMAIL_USER}}
-          #          smtp_password: ${{secrets.EMAIL_PASSWORD}}
-          #          body: From Docker
-          #          # ATTACHMENTS: ${{(on.email.outputs.text)}}
-          #          attachments: TEST atTACHMENTS
-          #          attachments_filename: ${{(on.email.outputs.subject)}}.txt
-          #          # entrypoint: /usr/bin/sendemail.sh
+          subject: ${{(on.email.outputs.subject)}}
+          smtp_server: outlook.office365.com:587
+          to_address: ${{secrets.TO_EMAIL}}
+          from_address: ${{secrets.EMAIL_USER}}
+          smtp_user: ${{secrets.EMAIL_USER}}
+          smtp_password: ${{secrets.EMAIL_PASSWORD}}
+          body: From Docker
+          # ATTACHMENTS: ${{(on.email.outputs.text)}}
+          attachments: TEST atTACHMENTS
+          attachments_filename: ${{(on.email.outputs.subject)}}.txt
+          # entrypoint: /usr/bin/sendemail.sh
 
           #  send_email:
           #    name: Send Email
