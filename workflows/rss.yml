@@ -1,6 +1,8 @@
 on:
   rss:
     url: https://hnrss.org/newest?points=300&count=3
+    config:
+      active: false
 jobs:
   print:
     name: Print
