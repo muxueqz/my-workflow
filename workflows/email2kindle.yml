@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-        echo "foo" > input.txt
+          echo "foo" > input.txt
       - uses: docker://pandoc/core:latest
         with:
           args: --output=index.docx input.txt
