@@ -56,8 +56,9 @@ jobs:
             # --output=outputs/index.docx
             # input.txt
       - name: Print Pandoc Outputs
-        run: |
-          wc -c index.docx
+        run: wc -c index.docx
+        # run: |
+          # wc -c index.docx
           #      - name: Send mail by action-send-mail
           #        uses: muxueqz/action-send-mail@v3.0.4
           #        with:
