@@ -101,7 +101,7 @@ jobs:
         run: |
           echo "$html" > input.html
       # - uses: docker://pandoc/core:latest
-      - name Convert via Pandoc
+      - name: Convert via Pandoc
         uses: maxheld83/pandoc@v2
         with:
           args: "--output=index.docx input.html"
