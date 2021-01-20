@@ -41,7 +41,7 @@ jobs:
           # echo "output=$(echo $output| base64)" >> $GITHUB_ENV
 
       - name: Send mail by action-send-mail
-        uses: muxueqz/action-send-mail@master
+        uses: muxueqz/action-send-mail@v3.0.4
         with:
           server_address: outlook.office365.com
           server_port: 587
