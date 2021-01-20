@@ -95,9 +95,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "foo" > input.txt  # create an example file
-      - uses: docker://pandoc/core:2.9
+      - uses: docker://pandoc/core:latest
         with:
-          args: |>  # allows you to break string into multiple lines
+          args: |>
             --standalone
             --output=outputs/index.docx
             input.txt
