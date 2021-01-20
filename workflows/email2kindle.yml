@@ -90,3 +90,17 @@ jobs:
           attachments: ${{(on.email.outputs.html)}}
           # attachments: TEST atTACHMENTS
           attachments_filename: ${{(on.email.outputs.subject)}}.html
+
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "foo" > input.txt  # create an example file
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: |>  # allows you to break string into multiple lines
+            --standalone
+            --output=outputs/index.docx
+            input.txt
+      - name: Print Pandoc Outputs
+        run: |
+          wc -c outputs/index.docx
