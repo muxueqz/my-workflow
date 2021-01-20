@@ -97,10 +97,11 @@ jobs:
       - run: echo "foo" > input.txt  # create an example file
       - uses: docker://pandoc/core:latest
         with:
-          args: |>
-            --standalone
-            --output=outputs/index.docx
-            input.txt
+          args: --output=outputs/index.docx input.txt
+          # args: |>
+            # --standalone
+            # --output=outputs/index.docx
+            # input.txt
       - name: Print Pandoc Outputs
         run: |
           wc -c outputs/index.docx
