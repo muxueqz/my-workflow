@@ -47,7 +47,7 @@ jobs:
           # args: "pandoc --standalone --output=index.docx input.html"
           # args: "input.html"
           email_server: outlook.office365.com
-          email_username: ${{secrets.EMAIL_USER}}
+          email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
           output_file: input.html
           message_id: ${{(on.email.outputs.messageId)}}
