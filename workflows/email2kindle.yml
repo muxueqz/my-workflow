@@ -32,13 +32,29 @@ jobs:
           echo html: $html
           echo text: $text
           echo textAsHtml: $textAsHtml
-          #      # - name: Print Base64 Outputs
-          #        # env:
-          #          # subject: ${{(on.email.outputs.subject)}}
-          #          # output: ${{(on.email.outputs.text)}}
-          #        # run: |
-          #          # echo "output=$(echo $output| base64)" >> $GITHUB_ENV
-          #
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make a html
+        env:
+          subject: ${{(on.email.outputs.subject)}}
+          html: ${{(on.email.outputs.html)}}
+          text: ${{(on.email.outputs.textAsHtml)}}
+        run: |
+          if [ "$html" == "false" ] ; then echo "$text" > input.html ;fi
+          echo "$html" >> input.html
+      # - uses: docker://pandoc/core:latest
+      - name: Convert via Pandoc
+        uses: maxheld83/pandoc@v2
+        with:
+          args: "--standalone --output=index.docx input.html"
+          # args: |>
+            # --standalone
+            # --output=outputs/index.docx
+            # input.txt
+      - name: Print Pandoc Outputs
+        run: |
+          wc -c index.docx
           #      - name: Send mail by action-send-mail
           #        uses: muxueqz/action-send-mail@v3.0.4
           #        with:
@@ -63,53 +79,3 @@ jobs:
           #          attachments: ${{(on.email.outputs.html)}}
           #          attachments_filename: ${{(on.email.outputs.subject)}}.html
           #          # attachments: ${{(output)}}
-          #      - name: Send Email by Docker
-          #        uses: muxueqz/sendemail-alpine@main
-          #        #        # env:
-          #        #          SUBJECT: ${{(on.email.outputs.subject)}}
-          #        #          SMTP_SERVER: outlook.office365.com:587
-          #        #          TO_ADDRESS: ${{secrets.TO_EMAIL}}
-          #        #          FROM_ADDRESS: ${{secrets.EMAIL_USER}}
-          #        #          SMTP_USER: ${{secrets.EMAIL_USER}}
-          #        #          SMTP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
-          #        #          BODY: From Docker
-          #        #          # ATTACHMENTS: ${{(on.email.outputs.text)}}
-          #        #          ATTACHMENTS: test ATTACHMENTS
-          #        #          ATTACHMENTS_FILENAME: ${{(on.email.outputs.subject)}}.txt
-          #        #        # run: |
-          #        #          # /usr/bin/sendemail.sh
-          #        with:
-          #          subject: ${{(on.email.outputs.subject)}}
-          #          smtp_server: outlook.office365.com:587
-          #          to_address: ${{secrets.TO_EMAIL}}
-          #          from_address: ${{secrets.EMAIL_USER}}
-          #          smtp_user: ${{secrets.EMAIL_USER}}
-          #          smtp_password: ${{secrets.EMAIL_PASSWORD}}
-          #          body: From Docker
-          #          attachments: ${{(on.email.outputs.html)}}
-          #          # attachments: TEST atTACHMENTS
-          #          attachments_filename: ${{(on.email.outputs.subject)}}.html
-
-  convert_via_pandoc:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Make a html
-        env:
-          subject: ${{(on.email.outputs.subject)}}
-          html: ${{(on.email.outputs.html)}}
-          text: ${{(on.email.outputs.textAsHtml)}}
-        run: |
-          if [ "$html" == "false" ] ; then echo "$text" > input.html ;fi
-          echo "$html" >> input.html
-      # - uses: docker://pandoc/core:latest
-      - name: Convert via Pandoc
-        uses: maxheld83/pandoc@v2
-        with:
-          args: "--standalone --output=index.docx input.html"
-          # args: |>
-            # --standalone
-            # --output=outputs/index.docx
-            # input.txt
-      - name: Print Pandoc Outputs
-        run: |
-          wc -c index.docx
