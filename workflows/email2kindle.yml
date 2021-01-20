@@ -49,7 +49,7 @@ jobs:
         uses: docker://pandoc/core:latest
         with:
           # args: "--standalone --output=index.docx input.html"
-          args: --help
+          args: pandoc --help
           # args: |>
             # --standalone
             # --output=outputs/index.docx
