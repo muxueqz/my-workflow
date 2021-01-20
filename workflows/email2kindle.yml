@@ -102,7 +102,7 @@ jobs:
           echo "$html" > input.html
       - uses: docker://pandoc/core:latest
         with:
-          args: --output=index.docx input.html
+          args: "--output=index.docx input.html"
           # args: |>
             # --standalone
             # --output=outputs/index.docx
