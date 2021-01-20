@@ -11,7 +11,7 @@ on:
       filterOutputs:
         # subject: send2kindle_by_workflow
         subject: 1
-        text: 1
+        # text: 1
         textAsHtml: 1
         html: 1
       # filter:
