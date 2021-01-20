@@ -13,27 +13,30 @@ on:
         # subject: send2kindle_by_workflow
         subject: 1
         # text: 1
-        textAsHtml: 1
-        html: 1
+        # textAsHtml: 1
+        # html: 1
+        messageId: 1
       # filter:
         # subject:
           # $regex: send2kindle_by_workflow
 jobs:
-  # send_email:
-    # name: Send Email
-    # runs-on: ubuntu-latest
-    # steps:
-      # - name: Print Outputs
-        # env:
-          # subject: ${{(on.email.outputs.subject)}}
+  send_email:
+    name: Send Email
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          subject: ${{(on.email.outputs.subject)}}
           # html: ${{(on.email.outputs.html)}}
           # textAsHtml: ${{(on.email.outputs.textAsHtml)}}
           # text: ${{(on.email.outputs.text)}}
-        # run: |
-          # echo subject: $subject
+          message_id: ${{(on.email.outputs.messageId)}}
+        run: |
+          echo subject: $subject
           # echo html: $html
           # echo text: $text
           # echo textAsHtml: $textAsHtml
+          echo message_id: $message_id
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
