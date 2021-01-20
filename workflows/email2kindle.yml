@@ -47,7 +47,8 @@ jobs:
       - name: Convert via Pandoc
         uses: maxheld83/pandoc@v2
         with:
-          args: "--standalone --output=index.docx input.html"
+          # args: "--standalone --output=index.docx input.html"
+          args: --help
           # args: |>
             # --standalone
             # --output=outputs/index.docx
