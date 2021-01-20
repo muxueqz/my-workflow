@@ -50,7 +50,7 @@ jobs:
         with:
           # args: "--standalone --output=index.docx input.html"
           # args: "pandoc --standalone --output=index.docx input.html"
-          args: "pandoc --standalone --output=${{(on.email.outputs.subject)}}.docx input.html"
+          args: "pandoc --output=${{(on.email.outputs.subject)}}.docx input.html"
           # args: pandoc --help
           # args: |>
             # --standalone
