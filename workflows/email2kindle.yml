@@ -37,14 +37,18 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
-      - name: Make a html
+      - name: Make a html from text
+        env:
+          subject: ${{(on.email.outputs.subject)}}
+          text: ${{(on.email.outputs.textAsHtml)}}
+        run: |
+          echo "$text" > input.html
+      - name: Make a html from html
         env:
           subject: ${{(on.email.outputs.subject)}}
           html: ${{(on.email.outputs.html)}}
-          text: ${{(on.email.outputs.textAsHtml)}}
         run: |
-          if [ "$html" == "false" ] ; then echo "$text" > input.html ;fi
-          echo "$html" >> input.html
+          if [ "$html" != "false" ] ; then echo "$html" > input.html ;fi
       # - uses: docker://pandoc/core:latest
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
