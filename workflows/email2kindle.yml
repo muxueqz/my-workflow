@@ -18,21 +18,21 @@ on:
         # subject:
           # $regex: send2kindle_by_workflow
 jobs:
-  send_email:
-    name: Send Email
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Outputs
-        env:
-          subject: ${{(on.email.outputs.subject)}}
-          html: ${{(on.email.outputs.html)}}
-          textAsHtml: ${{(on.email.outputs.textAsHtml)}}
-          text: ${{(on.email.outputs.text)}}
-        run: |
-          echo subject: $subject
-          echo html: $html
-          echo text: $text
-          echo textAsHtml: $textAsHtml
+  # send_email:
+    # name: Send Email
+    # runs-on: ubuntu-latest
+    # steps:
+      # - name: Print Outputs
+        # env:
+          # subject: ${{(on.email.outputs.subject)}}
+          # html: ${{(on.email.outputs.html)}}
+          # textAsHtml: ${{(on.email.outputs.textAsHtml)}}
+          # text: ${{(on.email.outputs.text)}}
+        # run: |
+          # echo subject: $subject
+          # echo html: $html
+          # echo text: $text
+          # echo textAsHtml: $textAsHtml
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
