@@ -7,6 +7,7 @@ on:
       user: ${{secrets.EMAIL_USER}}
       password: ${{secrets.EMAIL_PASSWORD}}
     config:
+      limit: 1
       filterOutputs:
         # subject: send2kindle_by_workflow
         subject: 1
