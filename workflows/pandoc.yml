@@ -1,6 +1,20 @@
 name: Document Conversion
 
-on: push
+on:
+  email:
+    imap:
+      host: outlook.office365.com
+      port: 993
+      tls: true
+      user: ${{secrets.EMAIL_USER}}
+      password: ${{secrets.EMAIL_PASSWORD}}
+    config:
+      filterOutputs:
+        # subject: send2kindle_by_workflow
+        subject: 1
+        text: 1
+        textAsHtml: 1
+        html: 1
 
 jobs:
   convert_via_pandoc:
