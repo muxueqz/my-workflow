@@ -32,7 +32,6 @@ jobs:
           echo html: $html
           echo text: $text
           echo textAsHtml: $textAsHtml
-
           #      # - name: Print Base64 Outputs
           #        # env:
           #          # subject: ${{(on.email.outputs.subject)}}
