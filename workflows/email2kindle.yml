@@ -49,7 +49,8 @@ jobs:
         uses: docker://pandoc/core:latest
         with:
           # args: "--standalone --output=index.docx input.html"
-          args: "pandoc --standalone --output=index.docx input.html"
+          # args: "pandoc --standalone --output=index.docx input.html"
+          args: "pandoc --standalone --output=${{(on.email.outputs.subject)}}.docx input.html"
           # args: pandoc --help
           # args: |>
             # --standalone
@@ -57,29 +58,26 @@ jobs:
             # input.txt
       - name: Print Pandoc Outputs
         run: wc -c index.docx
-        # run: |
-          # wc -c index.docx
-          #      - name: Send mail by action-send-mail
-          #        uses: muxueqz/action-send-mail@v3.0.4
-          #        with:
-          #          server_address: outlook.office365.com
-          #          server_port: 587
-          #          username: ${{secrets.EMAIL_USER}}
-          #          password: ${{secrets.EMAIL_PASSWORD}}
-          #          subject: ${{(on.email.outputs.subject)}}
-          #          body: Build job of ${{github.repository}} completed successfully!
-          #          to: ${{secrets.TO_EMAIL}}
-          #          from: actionsworkflow # <user@example.com>
-          #          #          # Optional content type (defaults to text/plain):
-          #          #          content_type: text/html
-          #          #          # Optional converting Markdown to HTML (set content_type to text/html too):
-          #          #          convert_markdown: true
-          #          #          # Optional attachments:
-          #          #          attachments: attachments.zip,git.diff,./dist/static/main.js
-          #          # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
-          #          # content_type: text/html
-          #          # attachments: ${{(on.email.outputs.textAsHtml)}}
-          #          # attachments: '[${{(on.email.outputs.text)}}]'
-          #          attachments: ${{(on.email.outputs.html)}}
-          #          attachments_filename: ${{(on.email.outputs.subject)}}.html
-          #          # attachments: ${{(output)}}
+      - name: Send mail by action-send-mail
+        # uses: muxueqz/action-send-mail@v3.0.4
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: outlook.office365.com
+          server_port: 587
+          username: ${{secrets.EMAIL_USER}}
+          password: ${{secrets.EMAIL_PASSWORD}}
+          subject: ${{(on.email.outputs.subject)}}
+          body: Build job of ${{github.repository}} completed successfully!
+          to: ${{secrets.TO_EMAIL}}
+          from: actionsworkflow # <user@example.com>
+          #          # Optional content type (defaults to text/plain):
+          #          content_type: text/html
+          #          # Optional converting Markdown to HTML (set content_type to text/html too):
+          #          convert_markdown: true
+          #          # Optional attachments:
+          #          attachments: attachments.zip,git.diff,./dist/static/main.js
+          # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
+          # content_type: text/html
+          # attachments: ${{(on.email.outputs.textAsHtml)}}
+          # attachments: '[${{(on.email.outputs.text)}}]'
+          attachments: ${{(on.email.outputs.subject)}}.docx
