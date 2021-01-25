@@ -22,8 +22,8 @@ jobs:
       - name: Setup act
         # uses: actionsflow/setup-act-for-actionsflow@v1
         run: 
-        wget -O /usr/bin/act https://github.com/nektos/act/releases/download/v0.2.17/act_Linux_x86_64.tar.gz
-        echo '-P ubuntu-latest=node:12.6-buster-slim\n-P ubuntu-12.04=node:12.6-buster-slim\n-P ubuntu-18.04=node:12.6-buster-slim' > ~/.actrc
+          wget -O /usr/bin/act https://github.com/nektos/act/releases/download/v0.2.17/act_Linux_x86_64.tar.gz
+          echo '-P ubuntu-latest=node:12.6-buster-slim\n-P ubuntu-12.04=node:12.6-buster-slim\n-P ubuntu-18.04=node:12.6-buster-slim' > ~/.actrc
 
       - name: Run act
         run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env -P ubuntu-latest=actionsflow/act-environment:v1 -P ubuntu-18.04=actionsflow/act-environment:v1
