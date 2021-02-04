@@ -8,17 +8,10 @@ on:
       password: ${{secrets.EMAIL_PASSWORD}}
     config:
       # force: 1
-      limit: 1
+      # limit: 1
       filterOutputs:
-        # subject: send2kindle_by_workflow
         subject: 1
-        # text: 1
-        # textAsHtml: 1
-        # html: 1
         messageId: 1
-      # filter:
-        # subject:
-          # $regex: send2kindle_by_workflow
 jobs:
   send_email:
     name: Send Email
@@ -27,55 +20,26 @@ jobs:
       - name: Print Outputs
         env:
           subject: ${{(on.email.outputs.subject)}}
-          # html: ${{(on.email.outputs.html)}}
-          # textAsHtml: ${{(on.email.outputs.textAsHtml)}}
-          # text: ${{(on.email.outputs.text)}}
           message_id: ${{(on.email.outputs.messageId)}}
         run: |
           echo subject: $subject
-          # echo html: $html
-          # echo text: $text
-          # echo textAsHtml: $textAsHtml
           echo message_id: $message_id
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
       - name: Get Email by Message ID
-        # uses: maxheld83/pandoc@v2
         uses: muxueqz/getemail-action@main
         with:
-          # args: "pandoc --standalone --output=index.docx input.html"
-          # args: "input.html"
           email_server: outlook.office365.com
           email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
           output_file: input.html
           message_id: ${{(on.email.outputs.messageId)}}
-      # - name: Make a html from text
-        # env:
-          # subject: ${{(on.email.outputs.subject)}}
-          # text: ${{(on.email.outputs.textAsHtml)}}
-        # run: |
-          # echo "$text" > input.html
-      # - name: Make a html from html
-        # env:
-          # subject: ${{(on.email.outputs.subject)}}
-          # html: ${{(on.email.outputs.html)}}
-        # run: |
-          # if [ "$html" != "false" ] ; then echo "$html" > input.html ;fi
-      # - uses: docker://pandoc/core:latest
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
         with:
-          # args: "--standalone --output=index.docx input.html"
-          # args: "pandoc --standalone --output=index.docx input.html"
           args: "pandoc --output=${{(on.email.outputs.subject)}}.docx input.html"
-          # args: pandoc --help
-          # args: |>
-            # --standalone
-            # --output=outputs/index.docx
-            # input.txt
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
         run: wc -c "${{(on.email.outputs.subject)}}.docx"
@@ -91,14 +55,4 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
           to: ${{secrets.TO_EMAIL}}
           from: actionsworkflow # <user@example.com>
-          #          # Optional content type (defaults to text/plain):
-          #          content_type: text/html
-          #          # Optional converting Markdown to HTML (set content_type to text/html too):
-          #          convert_markdown: true
-          #          # Optional attachments:
-          #          attachments: attachments.zip,git.diff,./dist/static/main.js
-          # attachments: '[{"content": "test attachments", "filename":"push.txt"}]'
-          # content_type: text/html
-          # attachments: ${{(on.email.outputs.textAsHtml)}}
-          # attachments: '[${{(on.email.outputs.text)}}]'
           attachments: "${{(on.email.outputs.subject)}}.docx"
