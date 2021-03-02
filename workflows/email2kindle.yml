@@ -26,8 +26,8 @@ jobs:
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
-        entrypoint: /bin/sh
         with:
+          entrypoint: /bin/sh
           args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
