@@ -57,7 +57,7 @@ jobs:
           to_address: ${{secrets.TO_EMAIL}}
           from_address: ${{secrets.EMAIL_USER}}
           attachments: "./outputs/"
-        #      - name: Set Read Email
-        #        uses: docker://muxueqz/getemail-action:latest
-        #        with:
-        #          args: "python /mark_unread.py"
+      - name: Set Read Email
+        uses: docker://muxueqz/getemail-action:latest
+        with:
+          args: "python /mark_unread.py"
