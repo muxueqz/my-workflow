@@ -58,9 +58,9 @@ jobs:
           from_address: ${{secrets.EMAIL_USER}}
           attachments: "./outputs/"
       - name: Set Read Email
-        uses: docker://muxueqz/getemail-action:latest
+        uses: muxueqz/email-mark-read-action@main
         with:
-          # entrypoint: /usr/bin/python3
-          # args: /mark_unread.py
-          entrypoint: /bin/sh
-          args: python3 /mark_unread.py
+          email_server: outlook.office365.com
+          email_user: ${{secrets.EMAIL_USER}}
+          email_password: ${{secrets.EMAIL_PASSWORD}}
+          output_file: './outputs/'
