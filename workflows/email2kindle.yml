@@ -5,7 +5,9 @@ on:
     run: |
       # const result = await helpers.axios.get("https://jsonplaceholder.typicode.com/posts")
       # return result.data
-      return "{id: 199}"
+      # return {id: 199}
+      const id = helpers.createContentDigest({ title: "value" });
+      # return
     deduplicationKey: id
 jobs:
   convert_via_pandoc:
