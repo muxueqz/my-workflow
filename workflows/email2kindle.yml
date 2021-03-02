@@ -1,45 +1,23 @@
 on:
-  email:
-    imap:
-      host: outlook.office365.com
-      port: 993
-      tls: true
-      user: ${{secrets.EMAIL_USER}}
-      password: ${{secrets.EMAIL_PASSWORD}}
-    config:
-      # force: 1
-      # limit: 1
-      filterOutputs:
-        subject: 1
-        messageId: 1
+  script:
+    run: |
+      return Date.now()
 jobs:
-  send_email:
-    name: Send Email
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Outputs
-        env:
-          subject: ${{(on.email.outputs.subject)}}
-          message_id: ${{(on.email.outputs.messageId)}}
-        run: |
-          echo subject: $subject
-          echo message_id: $message_id
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Email by Message ID
+      - name: Get UnRead Email
         uses: muxueqz/getemail-action@main
         with:
           email_server: outlook.office365.com
           email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
-          output_file: input.html
-          message_id: ${{(on.email.outputs.messageId)}}
+          output_file: './outputs/'
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
         with:
-          args: "pandoc --output=${{(on.email.outputs.subject)}}.docx input.html"
+          args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
         run: wc -c "${{(on.email.outputs.subject)}}.docx"
@@ -56,3 +34,8 @@ jobs:
           to: ${{secrets.TO_EMAIL}}
           from: actionsworkflow # <user@example.com>
           attachments: "${{(on.email.outputs.subject)}}.docx"
+      - name: Set Read Email
+        uses: muxueqz/getemail-action@main
+        uses: docker://muxueqz/getemail-action:latest
+        with:
+          args: "python mark_unread.py"
