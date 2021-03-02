@@ -28,7 +28,7 @@ jobs:
         uses: docker://pandoc/core:latest
         with:
           entrypoint: /bin/sh
-          args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"'
+          args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
         run: wc -c "${{(on.email.outputs.subject)}}.docx"
