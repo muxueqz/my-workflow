@@ -2,7 +2,7 @@ on:
   script:
     run: |
       return [{
-        id :Date.now(),
+        id: Date.now().toString(),
         title: 'run'
       }]
     # run: |
