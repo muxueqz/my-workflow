@@ -39,10 +39,8 @@ jobs:
         # run: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
         # run: for i in ./outputs/*.html; do pandoc --output="$i.docx" "$i"; done
           # args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
-      - name: Print Pandoc Outputs
-        # run: wc -c index.docx
-        # run: wc -c "${{(on.email.outputs.subject)}}.docx"
-        run: wc -c ./outputs/*.docx
+      # - name: Print Pandoc Outputs
+        # run: wc -c ./outputs/*.docx
       - name: Send mail by action-send-mail
         uses: muxueqz/sendemail-alpine@main
         # uses: dawidd6/action-send-mail@v2
