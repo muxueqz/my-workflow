@@ -25,16 +25,18 @@ jobs:
           output_file: './outputs/'
       - name: Make convert script
         # uses: maxheld83/pandoc@v2
-        uses: docker://pandoc/core:latest
-        with:
-          entrypoint: /bin/echo
-          args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
+        # uses: docker://pandoc/core:latest
+        # with:
+          # entrypoint: /bin/echo
+          # args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
+        run: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
-        with:
-          entrypoint: /bin/sh
-          args: ./outputs/convert.sh
+        # with:
+          # entrypoint: /bin/sh
+          # args: ./outputs/convert.sh
+        run: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
           # args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
