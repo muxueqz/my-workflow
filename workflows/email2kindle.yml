@@ -62,4 +62,5 @@ jobs:
         with:
           # entrypoint: /usr/bin/python3
           # args: /mark_unread.py
+          entrypoint: /bin/sh
           args: python3 /mark_unread.py
