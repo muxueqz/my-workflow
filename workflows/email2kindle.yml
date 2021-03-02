@@ -23,12 +23,19 @@ jobs:
           email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
           output_file: './outputs/'
+      - name: Make convert script
+        # uses: maxheld83/pandoc@v2
+        uses: docker://pandoc/core:latest
+        with:
+          entrypoint: /bin/echo
+          args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
         with:
           entrypoint: /bin/sh
-          args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
+          args: ./outputs/convert.sh
+          # args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
         run: wc -c "${{(on.email.outputs.subject)}}.docx"
