@@ -3,8 +3,9 @@ on:
     # run: |
       # return {id :Date.now()}
     run: |
-      const result = await helpers.axios.get("https://jsonplaceholder.typicode.com/posts")
-      return result.data
+      # const result = await helpers.axios.get("https://jsonplaceholder.typicode.com/posts")
+      # return result.data
+      return {id: 199}
     deduplicationKey: id
 jobs:
   convert_via_pandoc:
