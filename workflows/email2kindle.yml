@@ -47,15 +47,15 @@ jobs:
         uses: muxueqz/sendemail-alpine@main
         # uses: dawidd6/action-send-mail@v2
         with:
-          server_address: outlook.office365.com
+          smtp_server: outlook.office365.com:587
           server_port: 587
-          username: ${{secrets.EMAIL_USER}}
-          password: ${{secrets.EMAIL_PASSWORD}}
+          smtp_user: ${{secrets.EMAIL_USER}}
+          smtp_password: ${{secrets.EMAIL_PASSWORD}}
           # subject: ${{(on.email.outputs.subject)}}
           subject: "send to kindle"
           body: Build job of ${{github.repository}} completed successfully!
-          to: ${{secrets.TO_EMAIL}}
-          from: actionsworkflow # <user@example.com>
+          to_address: ${{secrets.TO_EMAIL}}
+          from_address: actionsworkflow # <user@example.com>
           attachments: "./outputs/"
         #      - name: Set Read Email
         #        uses: docker://muxueqz/getemail-action:latest
