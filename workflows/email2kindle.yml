@@ -2,7 +2,7 @@ on:
   script:
     run: |
       return [{
-        id: Date.now().toString(),
+        id: Date.now(),
         title: 'run'
       }]
     # run: |
@@ -26,6 +26,7 @@ jobs:
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
+        entrypoint: /bin/sh
         with:
           args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"'
       - name: Print Pandoc Outputs
