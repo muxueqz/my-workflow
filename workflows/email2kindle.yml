@@ -41,21 +41,22 @@ jobs:
           # args: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"'
       - name: Print Pandoc Outputs
         # run: wc -c index.docx
-        run: wc -c "${{(on.email.outputs.subject)}}.docx"
-      - name: Send mail by action-send-mail
-        # uses: muxueqz/action-send-mail@v3.0.4
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: outlook.office365.com
-          server_port: 587
-          username: ${{secrets.EMAIL_USER}}
-          password: ${{secrets.EMAIL_PASSWORD}}
-          subject: ${{(on.email.outputs.subject)}}
-          body: Build job of ${{github.repository}} completed successfully!
-          to: ${{secrets.TO_EMAIL}}
-          from: actionsworkflow # <user@example.com>
-          attachments: "${{(on.email.outputs.subject)}}.docx"
-      - name: Set Read Email
-        uses: docker://muxueqz/getemail-action:latest
-        with:
-          args: "python /mark_unread.py"
+        # run: wc -c "${{(on.email.outputs.subject)}}.docx"
+        run: wc -c ./outputs/*.docx
+        #      - name: Send mail by action-send-mail
+        #        # uses: muxueqz/action-send-mail@v3.0.4
+        #        uses: dawidd6/action-send-mail@v2
+        #        with:
+        #          server_address: outlook.office365.com
+        #          server_port: 587
+        #          username: ${{secrets.EMAIL_USER}}
+        #          password: ${{secrets.EMAIL_PASSWORD}}
+        #          subject: ${{(on.email.outputs.subject)}}
+        #          body: Build job of ${{github.repository}} completed successfully!
+        #          to: ${{secrets.TO_EMAIL}}
+        #          from: actionsworkflow # <user@example.com>
+        #          attachments: "${{(on.email.outputs.subject)}}.docx"
+        #      - name: Set Read Email
+        #        uses: docker://muxueqz/getemail-action:latest
+        #        with:
+        #          args: "python /mark_unread.py"
