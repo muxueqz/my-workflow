@@ -1,7 +1,7 @@
 on:
   script:
     run: |
-      return Date.now()
+      return {id :Date.now()}
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
