@@ -61,4 +61,4 @@ jobs:
         uses: docker://muxueqz/getemail-action:latest
         with:
           entrypoint: /usr/bin/python3
-          args: "/mark_unread.py"
+          args: /mark_unread.py
