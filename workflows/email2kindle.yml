@@ -37,4 +37,4 @@ jobs:
       - name: Set Read Email
         uses: docker://muxueqz/getemail-action:latest
         with:
-          args: "python mark_unread.py"
+          args: "python /mark_unread.py"
