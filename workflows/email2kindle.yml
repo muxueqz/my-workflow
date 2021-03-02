@@ -1,7 +1,11 @@
 on:
   script:
+    # run: |
+      # return {id :Date.now()}
     run: |
-      return {id :Date.now()}
+      const result = await helpers.axios.get("https://jsonplaceholder.typicode.com/posts")
+      return result.data
+    deduplicationKey: id
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
