@@ -29,7 +29,7 @@ jobs:
         # with:
           # entrypoint: /bin/echo
           # args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
-        run: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
+        run: for i in ./outputs/*.html;do pandoc --output='"$i.docx"' '"$i"' > outputs/convert.sh
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
