@@ -35,7 +35,6 @@ jobs:
           from: actionsworkflow # <user@example.com>
           attachments: "${{(on.email.outputs.subject)}}.docx"
       - name: Set Read Email
-        uses: muxueqz/getemail-action@main
         uses: docker://muxueqz/getemail-action:latest
         with:
           args: "python mark_unread.py"
