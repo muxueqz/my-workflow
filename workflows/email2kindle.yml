@@ -1,12 +1,15 @@
 on:
   script:
-    # run: |
-      # return {id :Date.now()}
     run: |
+      return [{
+        id :Date.now(),
+        title: 'run'
+      }]
+    # run: |
       # const result = await helpers.axios.get("https://jsonplaceholder.typicode.com/posts")
       # return result.data
       # return {id: 199}
-      const id = helpers.createContentDigest({ title: "value" });
+      # const id = helpers.createContentDigest({ title: "value" });
       # return
     deduplicationKey: id
 jobs:
