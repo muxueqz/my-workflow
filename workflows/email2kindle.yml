@@ -30,7 +30,7 @@ jobs:
           # entrypoint: /bin/echo
           # args: 'for i in ./outputs/*.html;do pandoc --output="$i.docx" "$i"' > outputs/convert.sh
         # run: echo 'for i in ./outputs/*.html;do [[ -r "$i" ]] && pandoc --output="$i.docx" "$i" ;done ; exit 0' > outputs/convert.sh
-        run: echo 'find /tmp/mozilla_muxueqz0/ -maxdepth 1 -name '*.html' ! -name 'Microsoft 帐户异常登录活动*' -exec pandoc --output="{}.docx" "{}" ; exit 0' > outputs/convert.sh
+        run: echo 'find /tmp/mozilla_muxueqz0/ -maxdepth 1 -name "*.html" ! -name "Microsoft 帐户异常登录活动*" -exec pandoc --output="{}.docx" "{}" ; exit 0' > outputs/convert.sh
       - name: Convert via Pandoc
         # uses: maxheld83/pandoc@v2
         uses: docker://pandoc/core:latest
