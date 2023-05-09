@@ -23,6 +23,8 @@ search_criteria = f'(UNSEEN HEADER To {recipient_email})'
 status, messages = imap.search(None, search_criteria)
 messages = messages[0].split(b' ')
 for message in messages:
+    if message == b'':
+        continue
     _, msg = imap.fetch(message, "(RFC822)")
     email_message = email.message_from_bytes(msg[0][1])
     if email_message.is_multipart():
