@@ -10,7 +10,7 @@ imap_username = os.environ.get("IMAP_USERNAME")
 imap_password = os.environ.get("IMAP_PASSWORD")
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(imap_username, imap_password)
-imap.select("INBOX", readonly=True)
+imap.select("INBOX")
 
 # Set up Pocket connection
 pocket_consumer_key = os.environ.get("POCKET_CONSUMER_KEY")
