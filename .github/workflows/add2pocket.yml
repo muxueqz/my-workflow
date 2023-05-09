@@ -1,0 +1,26 @@
+name: Check IMAP email and add to Pocket
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  check-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install pocket
+      - name: Check email and add to Pocket
+        env:
+          IMAP_SERVER: imap.gmail.com
+          IMAP_USERNAME: ${{ secrets.IMAP_USERNAME }}
+          IMAP_PASSWORD: ${{ secrets.IMAP_PASSWORD }}
+          POCKET_CONSUMER_KEY: ${{ secrets.POCKET_CONSUMER_KEY }}
+          POCKET_ACCESS_TOKEN: ${{ secrets.POCKET_ACCESS_TOKEN }}
+          POCKET_RECIPIENT_EMAIL: ${{ secrets.ADD2POCKET_EMAIL }}
+        run: |
+          python3 check_email_and_add_to_pocket.py
