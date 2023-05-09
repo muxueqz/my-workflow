@@ -1,8 +1,13 @@
 name: Check IMAP email and add to Pocket
 
 on:
+  repository_dispatch:
+  workflow_dispatch:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "*/30 * * * *"
+  push:
+    branches:
+      - main
 
 jobs:
   check-email:
@@ -16,9 +21,9 @@ jobs:
           pip3 install pocket
       - name: Check email and add to Pocket
         env:
-          IMAP_SERVER: imap.gmail.com
-          IMAP_USERNAME: ${{ secrets.IMAP_USERNAME }}
-          IMAP_PASSWORD: ${{ secrets.IMAP_PASSWORD }}
+          IMAP_SERVER: outlook.office365.com
+          IMAP_USERNAME: ${{secrets.EMAIL_USER}}
+          IMAP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
           POCKET_CONSUMER_KEY: ${{ secrets.POCKET_CONSUMER_KEY }}
           POCKET_ACCESS_TOKEN: ${{ secrets.POCKET_ACCESS_TOKEN }}
           POCKET_RECIPIENT_EMAIL: ${{ secrets.ADD2POCKET_EMAIL }}
