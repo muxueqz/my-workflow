@@ -28,7 +28,7 @@ jobs:
           git checkout --force --orphan date
           git add date.txt
           git commit -m "Update date.txt"
-          git push --force
+          git push --force --set-upstream origin date
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
