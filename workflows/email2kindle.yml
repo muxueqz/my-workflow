@@ -19,7 +19,7 @@ jobs:
       - name: Get UnRead Email
         uses: muxueqz/getemail-action@main
         with:
-          email_server: outlook.office365.com
+          email_server: ${{secrets.IMAP_SERVER}}
           email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
           output_file: './outputs/'

@@ -21,7 +21,7 @@ jobs:
           pip3 install pocket
       - name: Check email and add to Pocket
         env:
-          IMAP_SERVER: outlook.office365.com
+          IMAP_SERVER: ${{secrets.IMAP_SERVER}}
           IMAP_USERNAME: ${{secrets.EMAIL_USER}}
           IMAP_PASSWORD: ${{secrets.EMAIL_PASSWORD}}
           POCKET_CONSUMER_KEY: ${{ secrets.POCKET_CONSUMER_KEY }}
