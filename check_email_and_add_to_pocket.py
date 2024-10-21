@@ -9,8 +9,13 @@ imap_server = os.environ.get("IMAP_SERVER")
 imap_username = os.environ.get("IMAP_USERNAME")
 imap_password = os.environ.get("IMAP_PASSWORD")
 imap = imaplib.IMAP4_SSL(imap_server)
-imap.login(imap_username, imap_password)
-imap.select("INBOX")
+r, s = imap.login(imap_username, imap_password)
+
+print(r, s)
+r, s = imap.xatom('ID', '("name" "workflow" "version" "1.0" "vendor" "workflow")')
+print(r, s)
+r, s = imap.select("INBOX")
+print(r, s)
 
 # Set up Pocket connection
 pocket_consumer_key = os.environ.get("POCKET_CONSUMER_KEY")
