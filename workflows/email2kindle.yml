@@ -46,8 +46,8 @@ jobs:
         uses: muxueqz/sendemail-alpine@main
         # uses: dawidd6/action-send-mail@v2
         with:
-          smtp_server: outlook.office365.com:587
-          server_port: 587
+          smtp_server: ${{secrets.SMTP_SERVER}}
+          server_port: ${{secrets.SMTP_PORT}}
           smtp_user: ${{secrets.EMAIL_USER}}
           smtp_password: ${{secrets.EMAIL_PASSWORD}}
           # subject: ${{(on.email.outputs.subject)}}
@@ -59,7 +59,7 @@ jobs:
       - name: Set Read Email
         uses: muxueqz/email-mark-read-action@main
         with:
-          email_server: outlook.office365.com
+          email_server: ${{secrets.IMAP_SERVER}}
           email_user: ${{secrets.EMAIL_USER}}
           email_password: ${{secrets.EMAIL_PASSWORD}}
           output_file: './outputs/'
