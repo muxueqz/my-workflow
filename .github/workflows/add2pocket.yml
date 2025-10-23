@@ -19,6 +19,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install pocket
+          pip3 install supabase
       - name: Check email and add to Pocket
         env:
           IMAP_SERVER: ${{secrets.IMAP_SERVER}}
@@ -27,5 +28,10 @@ jobs:
           POCKET_CONSUMER_KEY: ${{ secrets.POCKET_CONSUMER_KEY }}
           POCKET_ACCESS_TOKEN: ${{ secrets.POCKET_ACCESS_TOKEN }}
           POCKET_RECIPIENT_EMAIL: ${{ secrets.ADD2POCKET_EMAIL }}
+          RECIPIENT_EMAIL: ${{ secrets.ADD2POCKET_EMAIL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL}}
+          SUPABASE_TABLE: ${{ secrets.SUPABASE_TABLE}}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY}}
         run: |
+          python3 check_email_and_add_to_readitlater.py
           python3 check_email_and_add_to_pocket.py
