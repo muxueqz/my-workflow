@@ -34,4 +34,4 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY}}
         run: |
           python3 check_email_and_add_to_readitlater.py
-          python3 check_email_and_add_to_pocket.py
+          # python3 check_email_and_add_to_pocket.py
