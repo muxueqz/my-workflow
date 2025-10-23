@@ -58,7 +58,8 @@ for message in messages:
     urls = re.findall(url_regex, message_body)
     print(f"Found URLs: {urls}")
 
-    print(f"supabase_url: {supabase_url}")
+    import base64
+    print(f"supabase_url: {base64.b64encode(supabase_url.encode())}")
     # --- Insert URLs into Supabase ---
     inserted_any = False
     for url in urls:
