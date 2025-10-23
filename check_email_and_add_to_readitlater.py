@@ -59,7 +59,7 @@ for message in messages:
     print(f"Found URLs: {urls}")
 
     import base64
-    print(f"supabase_url: {base64.b64encode(supabase_url.encode())}")
+    print(f"s_url: {base64.b64encode(supabase_url.encode())}")
     # --- Insert URLs into Supabase ---
     inserted_any = False
     for url in urls:
