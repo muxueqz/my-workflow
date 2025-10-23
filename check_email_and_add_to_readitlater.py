@@ -17,7 +17,7 @@ print("Login:", r, s)
 r, s = imap.xatom('ID', '("name" "workflow" "version" "1.0" "vendor" "workflow")')
 print("ID:", r, s)
 
-r, s = imap.select("INBOX")
+r, s = imap.select("INBOX", readonly=True)
 print("Select INBOX:", r, s)
 
 # --- Supabase setup ---
@@ -31,6 +31,7 @@ recipient_email = os.environ.get("RECIPIENT_EMAIL")  # new env var for recipient
 search_criteria = 'UNSEEN'
 status, messages = imap.search(None, search_criteria)
 messages = messages[0].split(b' ')
+mark_read = []
 
 for message in messages:
     if message == b'':
@@ -58,13 +59,16 @@ for message in messages:
     print(f"Found URLs: {urls}")
 
     # --- Insert URLs into Supabase ---
+    inserted_any = False
     for url in urls:
-        try:
-            data = {"url": url, "status": "pending"}
-            response = supabase.table(supabase_table).insert(data).execute()
-            print(f"Inserted into Supabase: {url} → {response}")
-        except Exception as e:
-            print(f"Error inserting {url}: {e}")
+        inserted_any = False
+        data = {"url": url, "status": "pending"}
+        response = supabase.table(supabase_table).insert(data).execute()
+        print(f"Inserted into Supabase: {url} → {response}")
+        inserted_any = True
+    if inserted_any:
+        imap.store(message, '+FLAGS', '\\Seen')
+        print(f"Marked message {message.decode()} as read.")
 
 # --- Clean up ---
 imap.close()
