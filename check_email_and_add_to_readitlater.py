@@ -31,7 +31,6 @@ recipient_email = os.environ.get("RECIPIENT_EMAIL")  # new env var for recipient
 search_criteria = 'UNSEEN'
 status, messages = imap.search(None, search_criteria)
 messages = messages[0].split(b' ')
-mark_read = []
 
 for message in messages:
     if message == b'':
@@ -73,4 +72,3 @@ for message in messages:
 # --- Clean up ---
 imap.close()
 imap.logout()
-print("Done.")
