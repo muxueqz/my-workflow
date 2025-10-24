@@ -17,7 +17,7 @@ print("Login:", r, s)
 r, s = imap.xatom('ID', '("name" "workflow" "version" "1.0" "vendor" "workflow")')
 print("ID:", r, s)
 
-r, s = imap.select("INBOX", readonly=True)
+r, s = imap.select("INBOX", readonly=False)
 print("Select INBOX:", r, s)
 
 # --- Supabase setup ---
@@ -36,7 +36,7 @@ mark_read = []
 for message in messages:
     if message == b'':
         continue
-    _, msg = imap.fetch(message, "(RFC822)")
+    _, msg = imap.fetch(message, "(BODY.PEEK[])")
     email_message = email.message_from_bytes(msg[0][1])
 
     # Extract plain text content
@@ -58,8 +58,6 @@ for message in messages:
     urls = re.findall(url_regex, message_body)
     print(f"Found URLs: {urls}")
 
-    import base64
-    print(f"s_url: {base64.b64encode(supabase_url.encode())}")
     # --- Insert URLs into Supabase ---
     inserted_any = False
     for url in urls:
