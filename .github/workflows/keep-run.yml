@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_TABLE: ${{ secrets.SUPABASE_TABLE }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
     steps:
       - name: Checkout repository
@@ -34,3 +38,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: date
           force: true
+
+      # ------------------------------------------------------
+      # Supabase Query Using LIMIT 1
+      # ------------------------------------------------------
+      - name: Query Supabase with limit 1
+        shell: bash
+        run: |
+          # request only one row
+          curl -s \
+            "${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?select=*&limit=1" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            -H "Content-Type: application/json"
