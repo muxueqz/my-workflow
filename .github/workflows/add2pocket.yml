@@ -3,11 +3,11 @@ name: Check IMAP email and add to Pocket
 on:
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: "*/30 * * * *"
-  push:
-    branches:
-      - main
+  # schedule:
+  #   - cron: "*/30 * * * *"
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   check-email:
